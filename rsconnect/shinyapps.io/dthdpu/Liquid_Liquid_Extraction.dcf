@@ -1,0 +1,14 @@
+name: Liquid_Liquid_Extraction
+title: Liquid_Liquid_Extraction
+username:
+account: dthdpu
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 7386520
+bundleId: 6429858
+url: https://dthdpu.shinyapps.io/Liquid_Liquid_Extraction/
+when: 1666445147.40839
+lastSyncTime: 1666445147.4084
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: introduction.Rmd|lle_weakacid.Rmd|lle_weakbase.Rmd|LLE.R|problems.Rmd|simpleLLE.R|simpleLLE.Rmd

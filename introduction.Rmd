@@ -1,0 +1,12 @@
+---
+output: html_document
+---
+
+A liquid-liquid extraction (LLE) is an important separation technique for environmental, clinical, and industrial laboratories. A standard environmental analytical method illustrates the importance of liquid-liquid extractions. Municipal water departments routinely monitor public water supplies for trihalomethanes (CHCl~3~, CHBrCl~2~, CHBr~2~Cl, and CHBr~3~) because they are known or suspected carcinogens. Before their analysis by gas chromatography, trihalomethanes are separated from their aqueous matrix using a liquid-liquid extraction with pentane.
+
+The figure to the right illustrates how we carry out a liquid-liquid extraction.
+Two immiscible phases are placed in a separatory funnel. One phase usually is an aqueous solvent and the other phase is an organic solvent, such as the pentane used to extract trihalomethanes from water. Because the phases are immiscible, they form two layers with the denser phase on the bottom.
+
+The solute initially is present in one of the two phases, shown here by the blue shading of phase 1 and the absence of any shading in phase 2. If the solute is soluble in both phases 2, then it will cross the interface between the phases until it reaches an equilibrium. To effect a more rapid extraction, we shake the separatory funnel to increase the surface area between the phases. When we stop shaking the separatory funnel, the phases separate with the solute now present in both, but concentrated in this case in phase 2. We can run a second extraction by transferring phase 1 into a new separatory funnel, adding a fresh portion of phase 2, and repeating the process.
+
+Extraction efficiency---that is, the percentage of the solute that moves from one phase to the other phase---is determined by the equilibrium constants for the solute's partitioning between the two phases and for any other side reactions that involve the solute in either phase. Examples of other reactions that affect extraction efficiency include acid-base reactions and complexation reactions.

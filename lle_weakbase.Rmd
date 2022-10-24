@@ -1,0 +1,19 @@
+---
+output: html_document
+---
+
+The figure on the lower right shows the relevant reactions and equations for the extraction of a weak base, B.
+
+The distribution ratio, *D*, accounts for the solute's two forms in the aqueous phase: the weak base, B, and its conjugate weak acid, HB^+^, the latter of which cannot partition into the organic phase. Rearranging the $K_b$ equation to solve for [HB^+^] and substituting into the equation for the distribution ratio gives
+
+$$D = \frac{[\text{B}_{org}]}{[\text{B}_{aq}] + \frac{K_b[\text{B}_{aq}]}{[\text{OH}^-]}}$$
+
+Factoring out $[\text{B}_{aq}]$ and replacing the ratio$[\text{B}_{org}]/[\text{B}_{aq}]$ with $K_D$ gives
+
+$$D = \frac{K_D[\text{OH}^-]}{[\text{OH}^-] + K_b}$$
+
+Finally the fraction of B that remains in the aqueous phase is
+
+$$(Q_{aq})_n = \left( \frac{V_{aq}}{D V_{org} + V_{aq}} \right)^n$$
+
+where $n$ is the number of identical extractions. Note that $D$ is a function of $[\text{OH}^-]$, which means $(Q_{aq})_n$ is pH-dependent with the extraction of B into the organic phase favored when $[\text{OH}^-] >> K_b$ ($\text{pOH} << \text{p}K_b$) where the equation for the distribution ratio becomes $D \approx K_D$. Set the sliders on the upper right for $D = 3$, $V_{aq} = V_{org} = 25 \text{ mL}$, $n = 1$, and $\text{p}K_b = 5$ and verify this by adjusting the pH. Compare your results to that for a simple LLE under the same conditions.
