@@ -1,0 +1,52 @@
+---
+output: html_document
+---
+
+<!-- The following script makes it possible to use the mhchem -->
+<!-- latex package in a .Rmd file and to knit it into an .html file -->
+<!-- the font size is scaled to 90% to match text -->
+
+```{=html}
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+    extensions: ["[Contrib]/mhchem/mhchem.js"]
+}
+});
+MathJax.Hub.Config({ 
+        "HTML-CSS": { scale: 90 }, 
+        SVG: { linebreaks: { automatic:true } }, 
+ });
+</script>
+```
+
+<!-- text for wrapping up -->
+
+Our treatment of liquid-liquid extractions is easy to extend to other systems, such as the two schemes illustrated on the right: the extraction of $\ce{I2}$ in the presence of iodide, $\ce{I-}$, and the extraction of the metal-ligand complex, $\ce{ML2}$. 
+
+#### Qualitative Evaluation of Extraction Efficiency
+
+Understanding how to control extraction efficiency is a straight-forward application of LeChâtelier's Principle. For example, in the extraction of $\ce{I2}$, decreasing the concentration of $\ce{I-}$ pushes the equilibrium reaction between $\ce{I2}$ and $\ce{I3-}$ to the left, which increases the concentration of $\ce{I2}$ in the aqueous phase; in turn, this pushes the equilibrium reaction between $(\ce{I2})_{aq}$ and $(\ce{I2})_{org}$ toward the organic phase, increasing the extraction efficiency.
+
+#### Deriving Equations for $D$ and for $(Q_{aq})_n$
+
+For a simple LLE the only equilibrium reaction is that between the solute in the aqueous phase and the solute in the organic phase 
+$$S_{aq} \rightleftharpoons S_{org}$$
+If the solute begins in the aqueous phase, then a conservation of mass requires that the moles of $S$ in the aqueous phase before the extraction is equal to the moles of $S$ in both phases after the extraction
+$$(\text{mol S}_{aq})_0 = (\text{mol S}_{aq})_1 + (\text{mol S}_{org})_1$$
+where the subscripts 0 and 1 are, respectively, before and after the first extraction. Solving for $(\text{mol S}_{org})_1$, substituting into the equation for $D$ and rearranging gives
+$$D = \frac{[S_{org}]}{[S_{aq}]} = \frac{\frac{(\text{mol S}_{aq})_0 - (\text{mol S}_{aq})_1}{V_{org}}}{\frac{(\text{mol S}_{aq})_1}{V_{aq}}} = \frac{(\text{mol S}_{aq})_0 \times V_{aq} - (\text{mol S}_{aq})_1 \times V_{aq}}{(\text{mol S}_{aq})_1 \times V_{org}}$$
+which rearranges to give
+$$q_{aq} = \frac{(\text{mol S}_{aq})_1}{(\text{mol S}_{aq})_0} = \frac{V_{aq}}{D V_{org} + V_{aq}}$$
+where $q_{aq}$ is the fraction of solute that remains in the aqueous phase after the extraction. For *n* identical extractions, the fraction that remains in the aqueous phase, $(Q_{aq})_n$, is
+$$(Q_{aq})_n = (q_{aq})^n = \left( \frac{V_{aq}}{D V_{org} + V_{aq}} \right)^n$$
+
+For any extraction in which we must account for other, secondary, equilibrium reactions, we need only determine how $D$ depends on the secondary equilibrium constants. For example, in the extraction of $\text{ML}_2$, we have, using the scheme on the lower right
+$$K_D = \frac{[\text{ML}_2]_{org}}{[\text{ML}_2]_{aq}} \quad \quad \beta_2 = \frac{[\text{ML}_2]_{aq}}{[\text{M}^{2+}]_{aq}[\text{L}^-]_{aq}^2} \quad \quad D = \frac{[\text{ML}_{2}]_{org}}{[\text{ML}_2]_{aq} + [\text{M}^{2+}]_{aq}}$$
+Solving $\beta_2$ for $[\text{M}^{2+}]_{aq}$ and substituting into the equation for the distribution ratio gives, after some rearranging
+$$D = \frac {K_D \beta_2 [\text{L}^-]_{aq}^2} {1 + \beta_2 [\text{L}^-]_{aq}^2}$$
+
+#### Additional Resources
+
+You can learn more about liquid-liquid extractions in [Chapter 7.7 of Analytical Chemistry 2.1](https://chem.libretexts.org/Bookshelves/Analytical_Chemistry/Analytical_Chemistry_2.1_(Harvey)/07%3A_Obtaining_and_Preparing_Samples_for_Analysis/7.07%3A_Liquid-Liquid_Extractions)
+

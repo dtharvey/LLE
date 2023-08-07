@@ -1,0 +1,34 @@
+---
+output: html_document
+---
+
+<!-- The following script makes it possible to use the mhchem -->
+<!-- latex package in a .Rmd file and to knit it into an .html file -->
+<!-- the font size is scaled to 90% to match text -->
+
+```{=html}
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+    extensions: ["[Contrib]/mhchem/mhchem.js"]
+}
+});
+MathJax.Hub.Config({ 
+        "HTML-CSS": { scale: 90 }, 
+        SVG: { linebreaks: { automatic:true } }, 
+ });
+</script>
+```
+
+<!-- text for activity 2 -->
+
+In a simple LLE, the solute partitions itself between an aqueous phase and an organic phase without the complication of other equilibrium reactions. If the solute is a weak acid, HA, then we have to consider both its equilibrium partition constant, $K_D$, and its acid dissociation constant, $K_a$, to determine its distribution ratio, $D$. 
+
+**Exercise 1**. Beginning with the equations for $K_D$, $D$, and $K_a$
+$$K_D = \frac{[\ce{HA}_{org}]}{[\ce{HA}_{aq}]} \quad \quad D = \frac{[\ce{HA}_{org}]}{[\ce{HA}_{aq}]+[\ce{A-}_{aq}]} \quad \quad  K_a = \frac{[\ce{H3O+}][\ce{A-}_{aq}]}{[\ce{HA}_{aq}]}$$
+show that
+$$D = \frac{K_D[\ce{H3O+}]}{[\ce{H3O+}] + K_a}$$
+
+**Exercise 2.** Note that $D$ is a function of $[\ce{H3O+}]$, which means $(Q_{aq})_n$ varies with the pH of the aqueous phase. Set the upper set of sliders to $\log(D) = 0$, $V_{aq} = 25 \text{ mL}$, $V_{org} = 25 \text{ mL}$, and $n = 1$ extractions. Adjust the solute's p$K_a$ to 5.00 and explore how the pH of the aqueous layer affects the extraction of HA from the aqueous phase to the organic phase. Given the equation for $D$, explain why your results make sense.
+
+**Exercise 3.** A weak acid, HA, has a p*k~a~* of 5 and an equilibrium partition constant, $K_D$, of 5 between an aqueous phase and an organic phase. What is the greatest extraction efficiency you can achieve using a single 25.0-mL portion of the weak acid and a single 25.0-mL portion of the organic phase? Suppose you want to minimize the extraction of HA, what limitation can you place on the sample's pH such that less than 1% of HA is extracted into the organic phase. Assume equal volumes of the weak acid and the organic phase.

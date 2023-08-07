@@ -2,7 +2,6 @@
 
 library(shiny)
 library(shinythemes)
-library(gt)
 
 # place for files and scripts
 
@@ -10,112 +9,146 @@ library(gt)
 palette("Okabe-Ito")
 
 shinyServer(function(input,output){
+  
+  output$simpleLLE = renderPlot({
+    # parameters
+    dist_ratio = 10^input$dist
+    vol_aq = input$vaq
+    vol_org = input$vorg
+    num_extract = input$numext
+    q_aq = round((vol_aq/(dist_ratio*vol_org + vol_aq))^num_extract, digits = 3)
+    q_org = round(1 - q_aq, digits = 3)
+    
+    # phases
+    x_aqorig = c(1,5,5,1)
+    y_aqorig = c(2,2,6,6)
+    x_orgorig = c(1,5,5,1)
+    y_orgorig = c(6,6,10,10)
+    x_aq = c(7,11,11,7)
+    y_aq = c(2,2,6,6)
+    x_org = c(7,11,11,7)
+    y_org = c(6,6,10,10)
+    
+    par(mar = c(5,1,0,1))
+    plot(x = -2,y = -2, asp = 1, pch = 19, 
+         col = "blue", xaxt = "n", yaxt = "n", xlim = c(0,12),
+         ylim = c(0,12), ylab = "", xlab = "", bty = "n")
+    polygon(x_aqorig, y_aqorig, border = 1, 
+            col = rgb(86,180,233, 255, maxColorValue = 255))
+    polygon(x_orgorig, y_orgorig, border = 1, 
+            col = rgb(86,180,233,0, maxColorValue = 255))
+    polygon(x_aq, y_aq, border = 1, 
+            col = rgb(86,180,233,q_aq*255, maxColorValue = 255))
+    polygon(x_org, y_org, border = 1, 
+            col = rgb(86,180,233,q_org*255, maxColorValue = 255))
+    text(x = 9, y = 4, bquote(Q[aq] == .(q_aq)), cex = 2, adj = c(0.5,0.5))
+    text(x = 9, y = 8, bquote(Q[org] == .(q_org)), cex = 2, adj = c(0.5,0.5))
+    text(x = 3, y = 4, bquote(Q[aq] == 1), cex = 2, adj = c(0.5,0.5))
+    text(x = 3, y = 8, bquote(Q[org] == 0), cex = 2, adj = c(0.5,0.5))
+    text(x = 1.1, y = 2.2, "aqueous phase", pos = 4, cex = 1.5)
+    text(x = 7.1, y = 2.2, "aqueous phase", pos = 4, cex = 1.5)
+    text(x = 10.9, y = 9.7, "organic phase", pos = 2, cex = 1.5)
+    text(x = 4.9, y = 5.7, "organic phase", pos = 2, cex = 1.5)
+    text(x = 3, y = 10.4, "before extraction", adj = c(0.5,0.5), cex = 2)
+    text(x = 9, y = 10.4, "after extraction", adj = c(0.5,0.5), cex = 2)
+  })
+  
+  output$lle_wa = renderPlot({
+    
+    # parameters
+    part_const = 10^input$dist_wa
+    vol_aq = input$vaq_wa
+    vol_org = input$vorg_wa
+    num_extract = input$numext_wa
+    ka = 10^-input$pka
+    h3o = 10^-input$ph
+    dist_ratio = part_const * h3o/(h3o + ka)
+    q_aq = round((vol_aq/(dist_ratio*vol_org + vol_aq))^num_extract, digits = 3)
+    q_org = round(1 - q_aq, digits = 3)
+    
+    # phases
+    x_aqorig = c(1,5,5,1)
+    y_aqorig = c(2,2,6,6)
+    x_orgorig = c(1,5,5,1)
+    y_orgorig = c(6,6,10,10)
+    x_aq = c(7,11,11,7)
+    y_aq = c(2,2,6,6)
+    x_org = c(7,11,11,7)
+    y_org = c(6,6,10,10)
+    
+    par(mar = c(5,1,0,1))
+    plot(x = -2,y = -2, asp = 1, pch = 19, 
+         col = "blue", xaxt = "n", yaxt = "n", xlim = c(0,12),
+         ylim = c(0,12), ylab = "", xlab = "", bty = "n")
+    polygon(x_aqorig, y_aqorig, border = 1, 
+            col = rgb(86,180,233, 255, maxColorValue = 255))
+    polygon(x_orgorig, y_orgorig, border = 1, 
+            col = rgb(86,180,233,0, maxColorValue = 255))
+    polygon(x_aq, y_aq, border = 1, 
+            col = rgb(86,180,233,q_aq*255, maxColorValue = 255))
+    polygon(x_org, y_org, border = 1, 
+            col = rgb(86,180,233,q_org*255, maxColorValue = 255))
+    text(x = 9, y = 4, bquote(Q[aq] == .(q_aq)), cex = 2, adj = c(0.5,0.5))
+    text(x = 9, y = 8, bquote(Q[org] == .(q_org)), cex = 2, adj = c(0.5,0.5))
+    text(x = 3, y = 4, bquote(Q[aq] == 1), cex = 2, adj = c(0.5,0.5))
+    text(x = 3, y = 8, bquote(Q[org] == 0), cex = 2, adj = c(0.5,0.5))
+    text(x = 1.1, y = 2.2, "aqueous phase", pos = 4, cex = 1.5)
+    text(x = 7.1, y = 2.2, "aqueous phase", pos = 4, cex = 1.5)
+    text(x = 10.9, y = 9.7, "organic phase", pos = 2, cex = 1.5)
+    text(x = 4.9, y = 5.7, "organic phase", pos = 2, cex = 1.5)
+    text(x = 3, y = 10.4, "before extraction", adj = c(0.5,0.5), cex = 2)
+    text(x = 9, y = 10.4, "after extraction", adj = c(0.5,0.5), cex = 2)
+    
+  })
  
- output$results_table = render_gt({
+ output$lle_wb = renderPlot({
    
-  n = input$numext
-  vol_org = input$vorg
-  vol_orgn = input$vorg/n
-  vol_aq = input$vaq
-  Qaq1 = (vol_aq/(input$dist * vol_org + vol_aq))
-  Qorg1 = 1 - Qaq1
-  Qaqn = (vol_aq/(input$dist * vol_orgn + vol_aq))^n
-  Qorgn = 1 - Qaqn
-  phase = c("organic", "aqueous")
-  A_initial = c(0,100)
-  A1 = c(100*Qorg1,100*Qaq1)
-  An = c(100*Qorgn, 100*Qaqn)
-  df = data.frame(phase, A_initial, A1, An)
-  t = gt(df) %>% 
-    fmt_number(columns = 2:4, decimals = 2, drop_trailing_zeros = FALSE) %>%
-    tab_spanner(label = "%analyte recovered in aqueous and organic phase when using", columns = c(2,3,4)) %>%
-    cols_label(phase = "phase",
-               A_initial = "no extractions",
-               A1 = paste("1 extraction with ", round(vol_org,2)," mL"),
-               An = paste(n, " extraction(s) with", 
-                          round(vol_orgn,2), " mL")) %>%
-    tab_header("Results of Extraction from Aqueous Phase to Organic Phase") %>%
-    tab_footnote(footnote = md("For *n* > 1, the volume of organic phase is equally split between the *n* extractions."), 
-                 locations = cells_column_labels(An))
-  t
- }, width = "600px")
- 
- output$lle_wa = render_gt({
-   
-   n = input$numext_wa
-   vol_org = input$vorg_wa
-   vol_orgn = input$vorg_wa/n
-   vol_aq = input$vaq_wa
-   dist_wa = input$dist_wa
-   h3o = 10^(-input$ph)
-   ka = 10^(-input$pka)
-   d_wa = (dist_wa * h3o)/(h3o + ka)
-   Qaq1_wa = (vol_aq/(d_wa * vol_org + vol_aq))
-   Qorg1_wa = 1 - Qaq1_wa
-   Qaqn_wa = (vol_aq/(d_wa * vol_orgn + vol_aq))^n
-   Qorgn_wa = 1 - Qaqn_wa
-   phase = c("organic", "aqueous")
-   HA_initial = c(0,100)
-   HA1 = c(100*Qorg1_wa,100*Qaq1_wa)
-   HAn = c(100*Qorgn_wa, 100*Qaqn_wa)
-   df = data.frame(phase, HA_initial, HA1, HAn)
-   
-   t_wa = gt(df) %>% 
-     fmt_number(columns = 2:4, decimals = 2, drop_trailing_zeros = FALSE) %>%
-     tab_spanner(label = "%analyte recovered in aqueous and organic phase when using", columns = c(2,3,4)) %>%
-     cols_label(phase = "phase",
-                HA_initial = "no extractions",
-                HA1 = paste("1 extraction with ", round(vol_org,2)," mL"),
-                HAn = paste(n, " extraction(s) with", 
-                           round(vol_orgn,2), " mL")) %>%
-     tab_header("Results of Extraction from Aqueous Phase to Organic Phase") %>%
-     tab_footnote(footnote = md("For *n* > 1, the volume of organic phase is equally split between the *n* extractions."), 
-                  locations = cells_column_labels(HAn))
-   t_wa
-   
- },
- width = "600px"
- )
- 
- output$lle_wb = render_gt({
-   
-   n = input$numext_wb
-   vol_org = input$vorg_wb
-   vol_orgn = input$vorg_wb/n
+   # parameters
+   part_const = 10^input$dist_wb
    vol_aq = input$vaq_wb
-   dist_wb = input$dist_wb
-   h3o = 10^(-input$ph_wb)
+   vol_org = input$vorg_wb
+   num_extract = input$numext_wb
+   kb = 10^-input$pkb
+   h3o = 10^-input$ph_wb
    oh = 1e-14/h3o
-   kb = 10^(-input$pkb) 
+   dist_ratio = part_const * oh/(oh + kb)
+   q_aq = round((vol_aq/(dist_ratio*vol_org + vol_aq))^num_extract, digits = 3)
+   q_org = round(1 - q_aq, digits = 3)
    
-   d_wb = (dist_wb * oh)/(oh + kb)
-   Qaq1_wb = (vol_aq/(d_wb * vol_org + vol_aq))
-   Qorg1_wb = 1 - Qaq1_wb
-   Qaqn_wb = (vol_aq/(d_wb * vol_orgn + vol_aq))^n
-   Qorgn_wb = 1 - Qaqn_wb
+   # phases
+   x_aqorig = c(1,5,5,1)
+   y_aqorig = c(2,2,6,6)
+   x_orgorig = c(1,5,5,1)
+   y_orgorig = c(6,6,10,10)
+   x_aq = c(7,11,11,7)
+   y_aq = c(2,2,6,6)
+   x_org = c(7,11,11,7)
+   y_org = c(6,6,10,10)
    
-   phase = c("organic", "aqueous")
-   B_initial = c(0,100)
-   B1 = c(100*Qorg1_wb,100*Qaq1_wb)
-   Bn = c(100*Qorgn_wb, 100*Qaqn_wb)
-   df = data.frame(phase, B_initial, B1, Bn)
+   par(mar = c(5,1,0,1))
+   plot(x = -2,y = -2, asp = 1, pch = 19,
+        col = "blue", xaxt = "n", yaxt = "n", xlim = c(0,12),
+        ylim = c(0,12), ylab = "", xlab = "", bty = "n")
+   polygon(x_aqorig, y_aqorig, border = 1,
+           col = rgb(86,180,233, 255, maxColorValue = 255))
+   polygon(x_orgorig, y_orgorig, border = 1,
+           col = rgb(86,180,233,0, maxColorValue = 255))
+   polygon(x_aq, y_aq, border = 1,
+           col = rgb(86,180,233,q_aq*255, maxColorValue = 255))
+   polygon(x_org, y_org, border = 1,
+           col = rgb(86,180,233,q_org*255, maxColorValue = 255))
+   text(x = 9, y = 4, bquote(Q[aq] == .(q_aq)), cex = 2, adj = c(0.5,0.5))
+   text(x = 9, y = 8, bquote(Q[org] == .(q_org)), cex = 2, adj = c(0.5,0.5))
+   text(x = 3, y = 4, bquote(Q[aq] == 1), cex = 2, adj = c(0.5,0.5))
+   text(x = 3, y = 8, bquote(Q[org] == 0), cex = 2, adj = c(0.5,0.5))
+   text(x = 1.1, y = 2.2, "aqueous phase", pos = 4, cex = 1.5)
+   text(x = 7.1, y = 2.2, "aqueous phase", pos = 4, cex = 1.5)
+   text(x = 10.9, y = 9.7, "organic phase", pos = 2, cex = 1.5)
+   text(x = 4.9, y = 5.7, "organic phase", pos = 2, cex = 1.5)
+   text(x = 3, y = 10.4, "before extraction", adj = c(0.5,0.5), cex = 2)
+   text(x = 9, y = 10.4, "after extraction", adj = c(0.5,0.5), cex = 2)
    
-   t_wb = gt(df) %>% 
-     fmt_number(columns = 2:4, decimals = 2, drop_trailing_zeros = FALSE) %>%
-     tab_spanner(label = "%analyte recovered in aqueous and organic phase when using", columns = c(2,3,4)) %>%
-     cols_label(phase = "phase",
-                B_initial = "no extractions",
-                B1 = paste("1 extraction with ", round(vol_org,2)," mL"),
-                Bn = paste(n, " extraction(s) with", 
-                            round(vol_orgn,2), " mL")) %>%
-     tab_header("Results of Extraction from Aqueous Phase to Organic Phase") %>%
-     tab_footnote(footnote = md("For *n* > 1, the volume of organic phase is equally split between the *n* extractions."), 
-                  locations = cells_column_labels(Bn))
-   t_wb
-   
- },
- width = "600px"
- )
+ })
  
 
   

@@ -1,0 +1,35 @@
+---
+output: html_document
+---
+
+<!-- The following script makes it possible to use the mhchem -->
+<!-- latex package in a .Rmd file and to knit it into an .html file -->
+<!-- the font size is scaled to 90% to match text -->
+
+```{=html}
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+    extensions: ["[Contrib]/mhchem/mhchem.js"]
+}
+});
+MathJax.Hub.Config({ 
+        "HTML-CSS": { scale: 90 }, 
+        SVG: { linebreaks: { automatic:true } }, 
+ });
+</script>
+```
+
+<!-- text for introduction -->
+
+A liquid-liquid extraction (LLE) is an important separation technique in environmental, clinical, and industrial laboratories. Municipal water departments, for example, monitor public water supplies for trihalomethanes ($\ce{CHCl3}$, $\ce{CHBrCl2}$, $\ce{CHBr2}$, and $\ce{CHBr3}$), which are known or suspected carcinogens. Prior to a quantitative analysis by gas chromatography, an LLE using pentane removes the trihalomethanes from their aqueous matrix and concentrates them in the pentane.
+
+#### Some Terminology
+
+The figure on the upper right illustrates one way to carry out a liquid-liquid extraction.
+Two immiscible phases are placed in a separatory funnel. The solute initially is present in one phase, shown by the blue shading of phase 1 and the absence of shading in phase 2. If the solute is soluble in both phases, then it will cross the interface between the phases until it reaches an equilibrium.
+
+There are two ways to describe the extent to which a solute moves between phases: a distribution ratio, $D$, and an equilibrium partition constant, $K_D$. The scheme on the lower right illustrates the difference between $D$ and $K_D$ for the extraction of a solute that is a weak acid. In the aqueous phase, the solute is present in both its weak acid, HA, and its weak base, $\ce{A-}$, forms. In the organic phase, however, it is present as only HA as $\ce{A-}$ is not soluble in an organic solvent. The equilibrium between HA in the aqueous phase and HA in the organic phase is determined by the equilibrium partition constant, $K_D$. 
+
+Of interest to us is the total concentration of solute in each phase without regard to its chemical form; this is the meaning of the distribution ratio, $D$. If the solute exists in only one form in both phases, then $D = K_D$; when one chemical form of the solute is involved in a separate equilibrium reaction, such as the $K_a$ reaction for HA, then $D$ and $K_D$ are no longer equal and an equation relating $K_D$ to $D$ must be derived (see this module's last tab for details). 
+

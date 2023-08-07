@@ -1,8 +1,8 @@
 # LLE
- 
-A multi-page application in a more traditional textual format that covers the liquid-liquid extraction of a solute that has no additional reactions in either phase, and the liquid-liquid extractions of weak acids and weak bases that have pH-dependent distribution functions.  
 
-To run locally, install the package Shiny (if not already installed), and enter the following two lines into the console:
+Introduces students to a simple liquid-liquid extraction of a solute that has no additional reactions in either the aqueous phase or the organic phase, and the liquid-liquid extractions of weak acids and weak bases that have pH-dependent distribution functions.
+ 
+To run locally, install the packages shiny and shinythemes (if not already installed), and enter the following two lines into the console:
 
 library(shiny)
 

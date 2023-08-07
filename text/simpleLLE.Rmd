@@ -1,0 +1,35 @@
+---
+output: html_document
+---
+
+<!-- The following script makes it possible to use the mhchem -->
+<!-- latex package in a .Rmd file and to knit it into an .html file -->
+<!-- the font size is scaled to 90% to match text -->
+
+```{=html}
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+    extensions: ["[Contrib]/mhchem/mhchem.js"]
+}
+});
+MathJax.Hub.Config({ 
+        "HTML-CSS": { scale: 90 }, 
+        SVG: { linebreaks: { automatic:true } }, 
+ });
+</script>
+```
+
+<!-- text for activity 1 -->
+
+In a simple liquid-liquid extraction, the partitioning of a solute, $S$, between the aqueous phase and the organic phase is given by the reaction $S_{aq} \ce{<=>} S_{org}$. Because $S$ has but one chemical form, the distribution ratio, $D$, and the equilibrium partitioning constant, $K_D$ are identical. For a simple LLE, the fraction of solute that remains in the aqueous phase, $(Q_{aq})_n$, is a function of four variables: the distribution ratio, $D$, the volume of the aqueous phase, $V_{aq}$, the volume of the organic phase, $V_{org}$, and the number of individual extractions, $n$ 
+$$(Q_{aq})_n = (q_{aq})^n = \left( \frac{V_{aq}}{DV_{org} + V_{aq}} \right)^n$$
+where $q_{aq}$ is the fraction of solute that remains in the aqueous phase in a single extraction (see this module's last tab for details).
+
+**Exercise 1.** Examine the equation for $(Q_{aq})_n$ and predict how an increase in $n$, while holding other variables constant, will affect the fraction of solute that remains in the aqueous phase. Repeat for the other three variables.
+
+**Exercise 2.** Use the sliders on the upper right to explore how these four variables affect the solute's extraction. Note that to include a wide range of values for $D$, the slider has a logarithmic scale; for example, $\log(D) = -2$ is $D = 10^{-2} = 0.01$. The fraction of solute in each phase---both before and after the extraction(s)---appear numerically and visually in the figure on the lower right. Prior to the extraction, the solute is present in only the aqueous phase. If your goal is to minimize $q_{aq}$, what conditions favor this outcome?
+
+**Exercise 3.** A solute has a distribution ratio between water and hexane of 7.5 . Compare the extraction efficiency if we extract a 50.0-mL portion of an aqueous sample of the solute using 50.0 mL of hexane as a single portion of 50.0 mL, as two portions of 25.0 mL each, as four portions of 12.5 mL each, and as five portions of 10.0 mL each. The solute is neither a weak acid or a weak base.
+
+**Exercise 4.** A solute has a distribution ratio of 10 between water and hexane. Is it possible to extract 99% of the solute in a 25.0-mL aqueous sample using a single 25.0-mL portion of hexane? If it is not, can you do so by dividing the 25.0 mL of hexane into two or more portions?

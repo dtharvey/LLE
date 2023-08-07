@@ -2,11 +2,10 @@
 
 library(shiny)
 library(shinythemes)
-library(gt)
 
 ui = navbarPage("AC 3.0: Liquid-Liquid Extractions",
                 theme = shinytheme("journal"),
-                tags$head(
+                header = tags$head(
                   tags$link(rel = "stylesheet",
                             type = "text/css",
                             href = "style.css")
@@ -15,15 +14,16 @@ ui = navbarPage("AC 3.0: Liquid-Liquid Extractions",
                   fluidRow(
                     column(width = 6,
                      wellPanel(
-                       includeHTML("introduction.html")
+                       includeHTML("text/introduction.html")
                 )       
                 ),
                     column(width = 6,
                            align = "center",
-                           br(),
-                           br(),
-                           br(),
-                    img(src = "sepfun.png",height = "500px")
+                    img(src = "sepfun.png",height = "400px"),
+                    br(),
+                    br(),
+                    br(),
+                    img(src = "LLE_WA.png", height = "200px")
                 )
                 )         
                 ),
@@ -32,30 +32,25 @@ ui = navbarPage("AC 3.0: Liquid-Liquid Extractions",
                   fluidRow(
                     column(width = 6,
                      wellPanel(
-                       includeHTML("simpleLLE.html"))       
+                       includeHTML("text/simpleLLE.html"))       
                   ),
                     column(width = 6,
                            align = "center",
                       splitLayout(
-                    sliderInput("dist","distribution ratio", 
-                                min = 0.1, max = 10, value = 1,
-                                width = "150px"),
+                    sliderInput("dist", "log(D)", 
+                                min = -2, max = 2, value = 0, step = 0.01,
+                                ticks = FALSE, width = "150px"),
                     sliderInput("vaq","mL aqueous phase",
-                                min = 1, max = 50, value = 25,
-                                width = "150px"),
+                                min = 1, max = 50, value = 25, step = 0.1,
+                                ticks = FALSE, width = "150px"),
                     sliderInput("vorg","mL organic phase",
-                                min = 1, max = 50, value = 25,
-                                width = "150px"),
+                                min = 1, max = 50, value = 25, step = 0.1,
+                                ticks = FALSE, width = "150px"),
                     sliderInput("numext","number of extractions",
                                 min = 1, max= 10, value = 1, step = 1,
-                                width = "150px")
+                                ticks = FALSE, width = "150px")
                   ),
-                  br(),
-                  br(),
-                  gt_output("results_table"),
-                  br(),
-                  br(),
-                  img(src = "simpleLLE.png", height = "250px")
+                  plotOutput("simpleLLE", height = "700px")
                   )
                   )       
                   ), # close tabpanel
@@ -64,39 +59,34 @@ ui = navbarPage("AC 3.0: Liquid-Liquid Extractions",
                   fluidRow(
                     column(width = 6,
                       wellPanel(
-                        includeHTML("lle_weakacid.html")
+                        includeHTML("text/lle_weakacid.html")
                       )
                   ),
                     column(width = 6,
                           align = "center",
                       splitLayout(
-                        sliderInput("dist_wa","partition constant", 
-                                    min = 0.1, max = 10, value = 1,
-                                    width = "150px"),
+                        sliderInput("dist_wa","log(partition constant)", 
+                                    min = -2, max = 2, value = 0, step = 0.01,
+                                    ticks = FALSE, width = "150px"),
                         sliderInput("vaq_wa","mL aqueous phase",
                                     min = 1, max = 50, value = 25,
-                                    width = "150px"),
+                                    ticks = FALSE, width = "150px"),
                         sliderInput("vorg_wa","mL organic phase",
                                     min = 1, max = 50, value = 25,
-                                    width = "150px"),
+                                    ticks = FALSE, width = "150px"),
                         sliderInput("numext_wa","number of extractions",
                                     min = 1, max= 10, value = 1, step = 1,
-                                    width = "150px")
+                                    ticks = FALSE, width = "150px")
                   ),
                     splitLayout(
                       sliderInput("pka", "weak acid's pKa",
-                                  min = 0, max = 14, value = 7,
-                                  width = "250px"),
+                                  min = 0, max = 14, value = 7, step = 0.01,
+                                  ticks = FALSE, width = "250px"),
                       sliderInput("ph", "pH of aqueous layer",
-                                  min = 0, max = 14, value = 4,
-                                  width = "250px")
+                                  min = 0, max = 14, value = 4, step = 0.01,
+                                  ticks = FALSE, width = "250px")
                     ),
-                  br(),
-                  br(),
-                  gt_output("lle_wa"),
-                  br(),
-                  br(),
-                  img(src = "LLE_WA.png", height = "250px")
+                  plotOutput("lle_wa", height = "700px"),
                   )
                   )   
                   ),
@@ -105,48 +95,45 @@ ui = navbarPage("AC 3.0: Liquid-Liquid Extractions",
                   fluidRow(
                     column(width = 6,
                       wellPanel(
-                      includeHTML("lle_weakbase.html")
+                      includeHTML("text/lle_weakbase.html")
                   )
                   ),
                     column(width = 6,
                            align = "center",
                       splitLayout(
-                        sliderInput("dist_wb", "partition coefficient",
-                                    min = 0.1, max = 10, value = 1,
-                                    width = "150px"),
+                        sliderInput("dist_wb", "log(partition constant)",
+                                    min = -2, max = 2, value = 0, step = 0.01,
+                                    ticks = FALSE, width = "150px"), 
                         sliderInput("vaq_wb", "mL aqueous phase",
-                                    min = 1, max = 50, value = 25,
-                                    width = "150px"),
+                                    min = 1, max = 50, value = 25, step = 0.01,
+                                    ticks = FALSE, width = "150px"),
                         sliderInput("vorg_wb", "mL organic phase",
-                                    min = 0.1, max = 50, value = 25,
-                                    width = "150px"),
+                                    min = 1, max = 50, value = 25, step = 0.01,
+                                    ticks = FALSE, width = "150px"),
                         sliderInput("numext_wb", "number of extractions",
                                     min = 1, max = 10, value = 1, step = 1,
-                                    width = "150px")
+                                    ticks = FALSE, width = "150px")
                   ),
                       splitLayout(
                          sliderInput("pkb", "weak base's pKb", 
-                                     min = 0, max = 14, value = 7,
-                                     width = "250px"),
+                                     min = 0, max = 14, value = 7, step = 0.01,
+                                     ticks = FALSE, width = "250px"),
                          sliderInput("ph_wb", "pH of aqueous layer",
-                                     min = 0, max = 14, value = 10,
-                                     width = "250px")
+                                     min = 0, max = 14, value = 10, step = 0.01,
+                                     ticks = FALSE, width = "250px")
                   ),
-                    br(),
-                    br(),
-                    gt_output("lle_wb"),
-                    br(),
-                    br(),
-                    img(src = "LLE_WB.png", height = "250px")
+
+                    plotOutput("lle_wb", height = "700px"),
                   )
                   )     
                   ),
                 
-                tabPanel("Problems",
+                tabPanel("Wrapping Up",
                   fluidRow(
                     column(width = 6,
-                    wellPanel(
-                      includeHTML("problems.html")
+                    wellPanel(id = "wrapuppanel",
+                              style = "overflow-y:scroll; max-height:750px",
+                      includeHTML("text/wrapup.html")
                     )             
                   ),
                     column(width = 6,
